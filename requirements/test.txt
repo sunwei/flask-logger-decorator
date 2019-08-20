@@ -1,0 +1,6 @@
+# requirements for running the tests via pytest
+pytest==4.5.0
+pytest-cov==2.7.1
+pytest-pep8==1.0.6
+
+-r tox.txt

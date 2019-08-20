@@ -1,0 +1,3 @@
+# requirements for building and running tox
+tox==3.9.0
+tox-travis>=0.10

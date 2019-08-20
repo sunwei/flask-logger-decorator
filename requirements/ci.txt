@@ -1,0 +1,6 @@
+# requirements for the CI test runner
+
+python-coveralls
+
+-r test.txt
+-r tox.txt

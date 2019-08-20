@@ -1,0 +1,21 @@
+language: python
+sudo: false
+python:
+- '3.4'
+- '3.5'
+- '3.6'
+install:
+- pip install -r requirements/base.txt
+- pip install -r requirements/ci.txt
+script: tox --recreate
+after_success:
+- py.test --cov=flask_logger_decorator --cov-report=term-missing tests
+- coveralls
+deploy:
+  provider: pypi
+  user: sunzhongmou
+  password:
+    secure: B5Aorul7q9qEUgCW9MfYdwJnaNlI3YR/D+hNrPVbD1pnw3kNFptfxireYqtpDn3GIw7XOLftUkf2vrItlDolO6bptPZ2wIIGEs3M1Mz+ALXJdgAbg5eGTig0Kh0uXFFZM4bsOx5R8h/QhmPJiNVFIavJOqIbQ3As8t+oiR2jmboK3vGh4M0EYm6qCBOoQ7WjX4JQrBJ3DQYSxHpY2ihmXY3hvjL6DM7UAnUNGvjaeP/XBfspsTwNPWSfnGsf7CIGFCwsuYnALZVSH2a6PcPGKyOACIhybJt/c8jggcAMNy35DNg/gmVjTwNX957YpKGNZIoAts/Jk+a02n4UAtYPSyfKig9ytH30G7Z5Q0P9qz3vWkAAV/mwen8SCHm5a62JLd5vIGBbMWwCSYlHpp3obtHqJAE96KQHAZf4e8WyLBdJCvDHRewaE2kOuaz8EN752qO2GrNZicNAvv46ePNRsemkd80dyYcSuIHKImxHedS+qlw+OZIRTRyYoBC6uFftM93z3i6tnVjGnygx0KDOHVEqC34oGd1gMvyGtbBpTV3byMo+vFi47HyZBoJz693iu/fneeoQbDXaKERRvBPink9KP+61ZrywIBdpYrmmswXmWeYsI09ogQfTipD+hIZZimFKKyoU+3efcRfFEHkeXEZygh52pn/oGcW/czErB9k=
+  on:
+    python: 3.6
+  skip_existing: true
