@@ -35,13 +35,5 @@ class _Config(object):
     def log_format_time_default(self):
         return '%Y-%m-%dT%T'
 
-    @property
-    def error_msg_key(self):
-        return current_app.config['JWT_ERROR_MESSAGE_KEY']
-
-    @property
-    def cloud_provider(self):
-        return current_app.config['LOGGER_CLOUD_PROVIDER']
-
 
 config = _Config()
