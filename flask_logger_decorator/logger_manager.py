@@ -6,8 +6,9 @@ FLASK_LOGGER = {}
 def _log(name):
     logger = FLASK_LOGGER.get(name)
     if not logger:
-        logger = Logger(name)
-        FLASK_LOGGER[name] = logger
+        the_logger = Logger(name)
+        FLASK_LOGGER[name] = the_logger.logger
+        logger = FLASK_LOGGER[name]
     return logger
 
 

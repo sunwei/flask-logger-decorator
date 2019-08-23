@@ -7,9 +7,9 @@ class Logger(object):
 
     def __init__(self, name=None):
         self.name = name
-        logger = logging.getLogger(name)
-        logger.handlers = []
-        self._setup_stdout(logger)
+        self.logger = logging.getLogger(name)
+        self.logger.handlers = []
+        self._setup_stdout(self.logger)
 
     @staticmethod
     def _setup_stdout(logger):

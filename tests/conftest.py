@@ -17,8 +17,9 @@ def _get_test_data(filename):
     return data
 
 
-@pytest.fixture(name='app')
+@pytest.fixture(name='app', scope='function')
 def app():
     flask_app = Flask(__name__)
-    LoggerExtension(flask_app)
+    with flask_app.app_context():
+        LoggerExtension(flask_app)
     return flask_app
