@@ -3,7 +3,7 @@ from reprlib import Repr
 import inspect
 from flask import request
 from flask_logger_decorator.config import config
-from flask_logger_decorator.logger_manager import debug
+from flask_logger_decorator.logger import debug
 
 __r = Repr()
 __r.maxarray = __r.maxarray * 10

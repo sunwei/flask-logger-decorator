@@ -5,7 +5,7 @@ from flask_logger_decorator.utils import generate_request_id
 from flask_logger_decorator.parser import auto_parser
 from flask_logger_decorator.config import config
 from flask_logger_decorator.request_decorators import get_request_trace_info
-from flask_logger_decorator.logger_manager import debug
+from flask_logger_decorator.logger import debug
 
 
 class LoggerExtension(object):

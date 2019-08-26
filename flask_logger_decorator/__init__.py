@@ -1,1 +1,1 @@
-from .api import Api
+from .logger import debug, info, warning, error, critical

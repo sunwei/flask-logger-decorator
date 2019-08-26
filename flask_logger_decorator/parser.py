@@ -1,20 +1,11 @@
 from flask import request
 
+_parsers = []
 
-def amazon_elb_trace_id():
-    """
-    Get the amazon ELB trace id from current Flask request context
-    :return: The found Trace-ID or None if not found
-    :rtype: str | None
-    """
-    amazon_request_id = request.headers.get('X-Amzn-Trace-Id', '')
-    trace_id_params = dict(x.split('=') if '=' in x else (x, None) for x in amazon_request_id.split(';'))
-    if 'Self' in trace_id_params:
-        return trace_id_params['Self']
-    if 'Root' in trace_id_params:
-        return trace_id_params['Root']
 
-    return None
+def request_id_parser(fn):
+    _parsers.append(fn)
+    return fn
 
 
 def generic_http_header_parser_for(header_name):
@@ -34,6 +25,7 @@ def generic_http_header_parser_for(header_name):
     return parser
 
 
+@request_id_parser
 def x_request_id():
     """
     Parser for generic X-Request-ID header
@@ -42,6 +34,7 @@ def x_request_id():
     return generic_http_header_parser_for('X-Request-ID')()
 
 
+@request_id_parser
 def x_correlation_id():
     """
     Parser for generic X-Correlation-ID header
@@ -50,7 +43,24 @@ def x_correlation_id():
     return generic_http_header_parser_for('X-Correlation-ID')()
 
 
-def auto_parser(parsers=(x_request_id, x_correlation_id, amazon_elb_trace_id)):
+@request_id_parser
+def amazon_elb_trace_id():
+    """
+    Get the amazon ELB trace id from current Flask request context
+    :return: The found Trace-ID or None if not found
+    :rtype: str | None
+    """
+    amazon_request_id = request.headers.get('X-Amzn-Trace-Id', '')
+    trace_id_params = dict(x.split('=') if '=' in x else (x, None) for x in amazon_request_id.split(';'))
+    if 'Self' in trace_id_params:
+        return trace_id_params['Self']
+    if 'Root' in trace_id_params:
+        return trace_id_params['Root']
+
+    return None
+
+
+def auto_parser():
     """
     Meta parser that will try all known parser and it will bring the first found id
     :param list[Callable] parsers: A list of callable parsers to try to extract request_id
@@ -58,7 +68,7 @@ def auto_parser(parsers=(x_request_id, x_correlation_id, amazon_elb_trace_id)):
     :rtype: str|None
     """
 
-    for parser in parsers:
+    for parser in _parsers:
         request_id = parser()
         if request_id is not None:
             return request_id
