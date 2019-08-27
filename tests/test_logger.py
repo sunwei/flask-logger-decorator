@@ -85,4 +85,3 @@ def test_critical(app):
         critical('test-critical', 'test message', extra={'foo': 'bar'})
 
         mock_logger.critical.assert_called_with('test message', extra={'foo': 'bar'})
-
