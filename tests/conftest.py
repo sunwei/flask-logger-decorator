@@ -22,4 +22,6 @@ def app():
     flask_app = Flask(__name__)
     with flask_app.app_context():
         LoggerExtension(flask_app)
+        flask_app.route('/', methods=['GET', 'POST'])(lambda: 'hello world')
+        flask_app.testing = True
     return flask_app

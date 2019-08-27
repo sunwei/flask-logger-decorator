@@ -1,7 +1,7 @@
 from functools import wraps
 from reprlib import Repr
 import inspect
-from flask import request
+from flask import request, g
 from flask_logger_decorator.config import config
 from flask_logger_decorator.logger import debug
 
@@ -25,10 +25,10 @@ def request_tracing(fn):
 def tracing_request(fn, *args, **kwargs):
     function_args = ' '.join(_get_fn_args(fn, *args, **kwargs))
     trace_info = ' '.join(_get_fn_extra_info(fn))
-    func_msg = 'func_name={} func_args:{} trace_info:{}'.format(
+    func_msg = 'func_name:{} func_args:{} trace_info:{}'.format(
         fn.__name__, function_args, trace_info)
     request_msg = get_request_trace_info()
-    debug(config.config.request_log_name, func_msg.join(' ').join(request_msg))
+    debug(config.request_log_name, 'req_msg={}; func_msg={}'.format(request_msg, func_msg))
 
 
 def _get_fn_args(fn, *args, **kwargs):
@@ -75,7 +75,7 @@ def _get_request_post_values():
 
 
 def get_request_trace_info():
-    trace_uuid = config.log_request_id
+    trace_uuid = getattr(g, config.log_request_id)
     query_args = ' '.join(_get_request_query_args())
     post_values = ' '.join(_get_request_post_values())
     return 'trace_uuid={} endpoint={} method={} ' \
