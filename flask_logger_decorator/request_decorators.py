@@ -82,3 +82,11 @@ def get_request_trace_info():
         ' query_args:{} post_values:{}'.format(
             trace_uuid, request.path, request.method,
             query_args, post_values)
+
+
+def get_response_trace_info(response):
+    trace_uuid = getattr(g, config.log_request_id)
+    return 'trace_uuid={} ip={} method={} ' \
+           ' path:{} status_code:{}'.format(
+            trace_uuid, request.remote_addr, request.method,
+            request.path, response.status_code)

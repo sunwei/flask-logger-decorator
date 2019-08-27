@@ -9,7 +9,7 @@ class _Config(object):
 
     @property
     def log_level(self):
-        return current_app.config['LOG_LEVEL']
+        return current_app.config.get('LOG_LEVEL')
 
     @property
     def log_format_console(self):
@@ -25,11 +25,11 @@ class _Config(object):
 
     @property
     def log_request_id(self):
-        return current_app.config['LOG_REQUEST_ID_G_OBJECT_ATTRIBUTE']
+        return current_app.config.get('LOG_REQUEST_ID_G_OBJECT_ATTRIBUTE')
 
     @property
     def log_all_requests(self):
-        return current_app.config['LOG_ALL_REQUESTS']
+        return current_app.config.get('LOG_ALL_REQUESTS')
 
     @property
     def log_format_time_default(self):

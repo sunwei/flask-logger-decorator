@@ -38,7 +38,7 @@ def test_get_request_with_amazon(app):
 @pytest.mark.usefixtures("app")
 def test_post_request_trace_info(app):
     with app.test_client() as c:
-        c.post('/', json={
+        c.post('/', data={
             'attr': 'value', 'other': 'data'
         })
         trace_info = get_request_trace_info()
@@ -59,7 +59,7 @@ def test_request_decorator(app):
         mock_logger = MagicMock()
         FLASK_LOGGER['flask-request-logger'] = mock_logger
 
-        c.post('/test-decorator', json={
+        c.post('/test-decorator', data={
             'attr': 'value', 'other': 'data'
         })
 

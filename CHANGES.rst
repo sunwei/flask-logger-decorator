@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.3
+-----
+
+- Log all request by default
+
 0.0.2
 -----
 
