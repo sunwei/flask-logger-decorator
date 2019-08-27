@@ -35,8 +35,6 @@ def _log(name):
 
 
 def debug(name, message, extra=None):
-    print("---===---")
-    print(message)
     _log(name).debug(message, extra=extra)
 
 
