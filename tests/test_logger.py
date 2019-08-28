@@ -16,20 +16,20 @@ def test_get_logger():
     assert get_logger('test-get-logger') is mock_logger
 
 
-@pytest.mark.usefixtures("app")
-@patch('logging.Formatter')
-@patch('logging.StreamHandler')
-def test_setup_stdout(mock_handler, mock_formatter, app):
-    """Test setup stdout."""
-
-    mock_handler.return_value = MagicMock()
-    mock_formatter.return_value = MagicMock()
-
-    with app.test_request_context():
-        debug('test-setup-stdout', 'test message', None)
-        assert mock_handler.called
-        assert mock_formatter.called
-        mock_handler.return_value.setFormatter.assert_called_once()
+# @pytest.mark.usefixtures("app")
+# @patch('logging.Formatter')
+# @patch('logging.StreamHandler')
+# def test_setup_stdout(mock_handler, mock_formatter, app):
+#     """Test setup stdout."""
+#
+#     mock_handler.return_value = MagicMock()
+#     mock_formatter.return_value = MagicMock()
+#
+#     with app.test_request_context():
+#         debug('test-setup-stdout', 'test message', None)
+#         assert mock_handler.called
+#         assert mock_formatter.called
+#         mock_handler.return_value.setFormatter.assert_called_once()
 
 
 @pytest.mark.usefixtures("app")
