@@ -26,8 +26,6 @@ class LoggerExtension(object):
         app.config.setdefault('LOG_LEVEL', logging.DEBUG)
         app.config.setdefault('LOG_ALL_REQUESTS', True)
 
-        debug(config.request_log_name, "Init flask request logger...")
-
         @app.before_request
         def _persist_request_id():
             g_object_attr = config.log_request_id
@@ -35,14 +33,11 @@ class LoggerExtension(object):
             setattr(g, g_object_attr, auto_parser())
             if g.get(g_object_attr) is None:
                 setattr(g, g_object_attr, generate_request_id())
-            if config.log_all_requests is True:
                 debug(config.request_log_name, get_request_trace_info())
 
-        if config.log_all_requests is True:
-            app.after_request(self._log_http_event)
+        app.after_request(self._log_http_event)
 
     @staticmethod
     def _log_http_event(response):
-        if config.log_all_requests is True:
-            debug(config.request_log_name, get_response_trace_info(response))
+        debug(config.request_log_name, get_response_trace_info(response))
         return response

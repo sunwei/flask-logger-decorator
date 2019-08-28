@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.7
+-----
+
+- Config to log all request and response
+
 0.0.6
 -----
 
