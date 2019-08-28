@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.8
+-----
+
+- Keep log level same with configuration
+
 0.0.7
 -----
 

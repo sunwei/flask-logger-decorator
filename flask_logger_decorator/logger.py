@@ -18,6 +18,7 @@ def get_logger(name=None):
     logger = FLASK_LOGGER.get(name)
     if not logger:
         logger = logging.getLogger(name)
+        logger.setLevel(config.log_level)
         logger.handlers = []
         _setup_stdout(logger)
     return logger
