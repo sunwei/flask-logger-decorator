@@ -9,10 +9,7 @@ def _setup_stdout(logger):
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setLevel(config.log_level)
 
-    fmt = (config.log_format_console or config.log_format_default)
-    fmt_date = config.log_format_time or config.log_format_time_default
-    formatter = logging.Formatter(fmt, fmt_date)
-
+    formatter = logging.Formatter(config.log_format_default, config.log_format_time_default)
     stdout_handler.setFormatter(formatter)
     logger.addHandler(stdout_handler)
 

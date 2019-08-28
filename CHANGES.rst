@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.5
+-----
+
+- Read config from source flask app
+
 0.0.4
 -----
 
