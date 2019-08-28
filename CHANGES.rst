@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.4
+-----
+
+- Get config with default value
+
 0.0.3
 -----
 
