@@ -23,10 +23,8 @@ class LoggerExtension(object):
 
     def _set_default_configuration_options(self, app):
         app.config.setdefault('LOG_REQUEST_ID_G_OBJECT_ATTRIBUTE', 'flask_log_request_id')
-        if app.config.get('LOG_LEVEL', None) is None:
-            app.config.setdefault('LOG_LEVEL', logging.DEBUG)
-        if app.config.get('LOG_ALL_REQUESTS', None) is None:
-            app.config.setdefault('LOG_ALL_REQUESTS', True)
+        app.config.setdefault('LOG_LEVEL', logging.DEBUG)
+        app.config.setdefault('LOG_ALL_REQUESTS', True)
 
         debug(config.request_log_name, "Init flask request logger...")
 

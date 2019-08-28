@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.0.6
+-----
+
+- Set default configuration
+
 0.0.5
 -----
 

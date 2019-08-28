@@ -42,9 +42,9 @@ def test_post_request_trace_info(app):
             'attr': 'value', 'other': 'data'
         })
         trace_info = get_request_trace_info()
-        post_value = "post_values:attr='value' other='data'"
 
-        assert post_value in trace_info
+        assert "attr='value'" in trace_info
+        assert "other='data'" in trace_info
 
 
 @pytest.mark.usefixtures("app")
