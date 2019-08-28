@@ -33,7 +33,8 @@ class LoggerExtension(object):
             setattr(g, g_object_attr, auto_parser())
             if g.get(g_object_attr) is None:
                 setattr(g, g_object_attr, generate_request_id())
-                debug(config.request_log_name, get_request_trace_info())
+
+            debug(config.request_log_name, get_request_trace_info())
 
         app.after_request(self._log_http_event)
 

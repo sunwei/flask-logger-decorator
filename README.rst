@@ -16,34 +16,22 @@ From pypi:
 
 ::
 
-    pip install ddd-api-gateway
+    pip install flask-logger-decorator
 
 Usage
 -----
 
 ::
 
-    from ddd_base.value_object import ValueObject
+    from flask_logger_decorator.logger_extension import LoggerExtension
 
 
-    class TheValueObject(ValueObject):
+    logger = LoggerExtension()
+    logger.init_app(app)
 
-        def __init__(self, name):
-            super(TheValueObject, self).__init__()
-            self.name = name
-
-        def __eq__(self, other):
-            if not isinstance(other, ValueObject):
-                return NotImplemented
-
-            return self.name == other.name
-
-
-    def test_value_object_compare():
-        a_value_object = TheValueObject("name")
-        b_value_object = TheValueObject("name")
-
-        assert a_value_object.same_as(b_value_object)
+    #examples
+    2019-08-28T10:33:34 flask-request-logger      DEBUG: trace_uuid=befc1448-8f6d-4d1e-88ca-d3e04cd16f8e endpoint=/api/v1/user method=GET  query_args: post_values:
+    2019-08-28T10:33:34 flask-request-logger      DEBUG: trace_uuid=befc1448-8f6d-4d1e-88ca-d3e04cd16f8e ip=127.0.0.1 method=GET  path:/api/v1/user status_code:401
 
 
 
@@ -54,9 +42,9 @@ This software is licensed under the `MIT license <http://en.wikipedia.org/wiki/M
 
 See `License file <https://github.com/sunwei/ddd-base/blob/master/LICENSE>`_
 
-.. |Build Status| image:: https://travis-ci.com/sunwei/ddd-api-gateway.svg?branch=master
-   :target: https://travis-ci.com/sunwei/ddd-api-gateway
-.. |Pypi Status| image:: https://badge.fury.io/py/ddd-api-gateway.svg
-   :target: https://badge.fury.io/py/ddd-api-gateway
-.. |Coveralls Status| image:: https://coveralls.io/repos/github/sunwei/ddd-api-gateway/badge.svg?branch=master
-   :target: https://coveralls.io/github/sunwei/ddd-api-gateway?branch=master
+.. |Build Status| image:: https://travis-ci.com/sunwei/flask-logger-decorator.svg?branch=master
+   :target: https://travis-ci.com/sunwei/flask-logger-decorator
+.. |Pypi Status| image:: https://badge.fury.io/py/flask-logger-decorator.svg
+   :target: https://badge.fury.io/py/flask-logger-decorator
+.. |Coveralls Status| image:: https://coveralls.io/repos/github/sunwei/flask-logger-decorator/badge.svg?branch=master
+   :target: https://coveralls.io/github/sunwei/flask-logger-decorator?branch=master
